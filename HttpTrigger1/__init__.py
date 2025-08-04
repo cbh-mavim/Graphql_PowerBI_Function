@@ -2,6 +2,7 @@ import logging
 import azure.functions as func
 import requests
 import os
+import json  # Required for proper JSON formatting
 
 def get_token():
     data = {
@@ -12,6 +13,7 @@ def get_token():
     }
     tenant_id = os.environ["TENANT_ID"]
     token_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+    
     resp = requests.post(token_url, data=data)
     resp.raise_for_status()
     return resp.json()["access_token"]
@@ -21,6 +23,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     try:
         token = get_token()
+
         query = {
             "query": """
             query {
@@ -41,12 +44,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         gql_response = requests.post(graphql_url, json=query, headers=headers)
         gql_response.raise_for_status()
 
+        # Proper JSON serialization
         return func.HttpResponse(
-            body=gql_response.text,
+            body=json.dumps(gql_response.json()),
             status_code=200,
             mimetype="application/json"
         )
 
     except Exception as e:
-        logging.error(str(e))
+        logging.error(f"Error in Azure Function: {str(e)}")
         return func.HttpResponse(str(e), status_code=500)
