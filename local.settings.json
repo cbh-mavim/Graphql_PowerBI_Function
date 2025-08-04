@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "TENANT_ID": "74c129d6-75e9-47bc-89e7-fc64baa89a47",
+    "CLIENT_ID": "6244968a-d7da-4022-9721-cfdcc37f06be",
+    "CLIENT_SECRET": "FQH8Q~kGS7QTFmCE0-TfB-EflfowTIOAK9AVYaEg",
+    "SCOPE": "api://3bd13b6a-2f23-4ace-9d71-d6d6a8e77a4e/.default",
+    "GRAPHQL_URL": "https://c1-graphql-api-demo-hmf8arb6csd5eyfs.southindia-01.azurewebsites.net/graphql"
+  }
+}
